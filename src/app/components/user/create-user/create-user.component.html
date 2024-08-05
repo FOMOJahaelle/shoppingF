@@ -1,0 +1,70 @@
+<!-- <div class="flex flex-column md:flex-row">
+    <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+        <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Username</label>
+            <input pInputText id="username" type="text" class="w-12rem" />
+        </div>
+        <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+            <label class="w-6rem">Password</label>
+            <input pInputText id="password" type="password" class="w-12rem" />
+        </div>
+        <p-button label="Login" icon="pi pi-user" styleClass="w-10rem mx-auto" />
+    </div>
+</div> -->
+
+
+
+<!-- <div class="p-3">
+    <div class="card">
+         <div class="card-header">NOUVEL UTILISATEUR </div>
+         <div class="card-body">
+          <form  [formGroup]="formUser"  (ngSubmit)="saveUser()">
+            <div class="flex flex-column md:flex-row">
+                <div class="w-full md:w-5 flex flex-column align-items-center justify-content-center gap-3 py-5">
+                    <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label class="w-6rem" for="username">Username</label>
+                        <input pInputText id="username" type="text" class="w-12rem"  formControlName="username"/>
+                    </div>
+                    <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label class="w-6rem" for="password">Password</label>
+                        <input pInputText id="password" type="password" class="w-12rem" formControlName="password" />
+                    </div>
+                    <div class="flex flex-wrap justify-content-center align-items-center gap-2">
+                        <label class="w-6rem" for="role
+                        ">Role</label>
+                        <input pInputText id="role" type="text" class="w-12rem" formControlName="role" />
+                    </div>
+                    <p-button label="Login" icon="pi pi-user" styleClass="w-10rem mx-auto" />
+                </div>
+            </div>
+             
+          </form>    
+         
+    </div>
+</div> -->
+
+
+<div class="p-3">
+    <div class="card">
+
+         <div class="card-header">CREER UN COMPTE</div>
+
+         <div class="card-body">
+            <form [formGroup]="formUser" (ngSubmit)="saveUser()">
+                <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input  id="username"  type="text" class="form-control" placeholder="Entrez Votre Nom" formControlName="username">
+                </div>
+                <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input  id="password" type="password" class="form-control" placeholder="Entez Votre Mot De Passe" formControlName="password">
+                </div>
+                <div class="mb-3">
+                    <label for="role" class="form-label">Role</label>
+                    <input  id="role" type="text" class="form-control"  formControlName="role">
+                </div>
+                <button class="btn btn-success">Create</button>
+            </form>
+         </div>
+</div>
+
