@@ -3,6 +3,7 @@ import { Observable} from 'rxjs';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User} from '../../models/user/user';
 import { LoginRequest } from '../../models/longin/login-request';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -10,32 +11,48 @@ import { LoginRequest } from '../../models/longin/login-request';
 export class UserService {
   
   private baseUrl: string;
-  
-  isAuthenticated = false;
+
   roles : any;
   username: any;
-  accessToken:any;
-  stateItem: any;
-  // token: string | null = null;
+  accessToken ='auth-token';
 
-  constructor( private httpClient: HttpClient) {
+  constructor( private httpClient: HttpClient,private router: Router) {
 
     this.baseUrl = "http://localhost:8080/api/users";
   }
 
   // auth = 'Bearer ' + sessionStorage.getItem('token');
 
+  // onLogin(login: LoginRequest){
+  //   let baseUrlGet = this.baseUrl+"/login";
+  //   let params = new HttpParams()
+  //   .set ("username",login.username).set("password",login.password);
 
-  onLogin(login: LoginRequest){
-    let baseUrlGet = this.baseUrl+"/login";
-    let params = new HttpParams()
-    .set ("username",login.username).set("password",login.password);
-
-    let options = { headers:new HttpHeaders()
-      .set( "Content-Type ","application/x-www-form-urlencoded")
-    }
+  //   let options = { headers:new HttpHeaders()
+  //     .set( "Content-Type ","application/x-www-form-urlencoded")
+  //   }
    
-    return this.httpClient.post(baseUrlGet, params,options);
+  //   return this.httpClient.post(baseUrlGet, params,options);
+  // }
+
+
+   // Sign-in
+   
+   onLogin(login: LoginRequest) {
+    let baseUrlGet = this.baseUrl+"/login";
+    return this.httpClient
+      .post<any>(baseUrlGet, login)
+  }
+
+
+  getToken() {
+    return  sessionStorage.getItem('accessToken');
+  }
+
+  
+   isLoggedIn(): boolean {
+    let authToken = localStorage.getItem('token');
+    return authToken !== null ? true : false;
   }
 
   
@@ -53,8 +70,8 @@ export class UserService {
 
 
   loadProfile(data: any) {
-     this.isAuthenticated= true;
-   this.accessToken = data['access-token'];
+    //  this.isAuthenticated= true;
+   this.accessToken = data['token'];
    let decodedJwt : any= Jwtdecode(this.accessToken);
    this.username = decodedJwt.sub;
    this.roles = decodedJwt.scope; 
@@ -82,16 +99,18 @@ export class UserService {
   }
 
 
-  // GetToken() {
-  //   const _auth = this.stateItem.getValue();
-  //   // check if auth is still valid first before you return
-  //   return this.CheckAuth(_auth) ? _auth.accessToken : null;
-  // }
-  // GetRefreshToken() {
-  //   const _auth = this.stateItem.getValue();
-  //   // check if auth is still valid first before you return
-  //   return this.CheckAuth(_auth) ? _auth.refreshToken : null;
-  // }
+  logout() {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
+
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('token');
+    // Logique de vérification de la validité du token
+    return !!token;
+  }
+
+
   
 
 }

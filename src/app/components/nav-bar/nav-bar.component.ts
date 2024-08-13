@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
  import { CommonModule } from '@angular/common';
 import { RouterLinkActive, RouterOutlet } from '@angular/router';
 import { Router } from '@angular/router';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,10 +17,22 @@ import { Router } from '@angular/router';
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.scss'
 })
-export class NavBarComponent {
+export class NavBarComponent implements OnInit {
 
-  constructor(private router: Router){
+
+
+
+  constructor(private router: Router,private userService:UserService){
 
   }
+
+  ngOnInit(): void {
+    
+  }
+
+
+  logout() {
+    this.userService.logout();
+    }
 
 }

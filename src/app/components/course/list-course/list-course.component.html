@@ -1,8 +1,8 @@
 <!-- <app-header></app-header> -->
 
 <h2> Course List </h2>
+<a   routerLink="/admin/create-course"><button class="btn btn-primary mb-3">New</button></a>
 
-<button class="btn btn-primary mb-3">New</button>
 
 <table class = "table table-striped">
   <thead>
@@ -13,7 +13,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let course of courses">
+    <tr *ngFor="let course of this.courses">
       <td> {{ course.name }} </td>
       <td> {{ course.description }} </td>
       <td> {{ course.archive }} </td>

@@ -30,7 +30,7 @@ import { UserService } from './services/user/user.service';
     useClass: appHttpInterceptor,
     multi: true,
     deps: [UserService]
-    }
+    },
     
   ],
 

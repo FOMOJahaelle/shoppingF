@@ -39,9 +39,6 @@ export class ListCourseComponent  implements OnInit{
 
   getCourses(){
     this.courseService.courseList().subscribe((data: any) => {
-      console.log(data)
-      data = data.data
-      console.table(data)
       this.courses = data;
 
     });

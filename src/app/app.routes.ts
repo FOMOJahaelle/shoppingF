@@ -14,7 +14,7 @@ import { AdminComponent } from './components/admin/admin.component';
 
 
 export const routes: Routes = [
-    { path: ' ', redirectTo: 'create-user', pathMatch: 'full'},
+    { path: '', redirectTo: '/login', pathMatch: 'full'},
     {path: 'login', component: LoginComponent},
     {path: 'create-user',component:CreateUserComponent} ,
     
@@ -29,3 +29,5 @@ export const routes: Routes = [
 ];
 
 // , canActivate: [authentificationGuard] 
+
+// , canActivate: [authentificationGuard], data:{role:"ADMIN"}

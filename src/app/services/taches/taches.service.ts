@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Taches } from '../../models/taches/taches';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -8,17 +8,24 @@ import { Observable } from 'rxjs';
 })
 export class TachesService {
 
+
+  headers: HttpHeaders;
+  token?: String;
   private baseUrl: string;
 
   constructor( private httpClient: HttpClient) {
     this.baseUrl = "http://localhost:8080/api/tache";
+
+    this.headers =  new HttpHeaders({ Authorization:'Bearer '+ this.token,
+      'Content-Type': 'application/json; charset=uTF-8'
+    })
   }
 
   // auth = 'Bearer ' + sessionStorage.getItem('token');
 
   createTache(taches: Taches){
     let baseUrlGet = this.baseUrl+"/create";
-    return this.httpClient.post(baseUrlGet, taches)
+    return this.httpClient.post(baseUrlGet, taches,{headers: this.headers})
   }
 
   tachesList(): Observable<Taches[]>{

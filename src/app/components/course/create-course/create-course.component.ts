@@ -30,6 +30,7 @@ export class CreateCourseComponent implements OnInit {
   formCourse!: FormGroup;
   
 course: Course = new Course();
+  showMessages: any;
 
 constructor(private fb: FormBuilder,
   private courseService: CourseService,
@@ -37,6 +38,8 @@ constructor(private fb: FormBuilder,
 ) { }
 
 ngOnInit(): void {
+
+  this.showMessages = sessionStorage.getItem('message');
   this.formCourse =this.fb.group({
     name: this.fb.control(" "),
     description : this.fb.control(" "),
@@ -52,10 +55,13 @@ ngOnInit(): void {
 // });
 
 saveCourse(){
+  // console.log(this.formCourse.value);
   this.courseService.createCourse(this.formCourse.value).subscribe({
+    
     next : data =>{
+     
       console.log(data);
-      // this.router.navigateByUrl("/list-course")
+     this.router.navigateByUrl("/list-course")
     },
     error: err =>{
       console.log(err);
