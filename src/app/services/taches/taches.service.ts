@@ -23,13 +23,13 @@ export class TachesService {
 
   // auth = 'Bearer ' + sessionStorage.getItem('token');
 
-  createTache(taches: Taches){
-    let baseUrlGet = this.baseUrl+"/create";
-    return this.httpClient.post(baseUrlGet, taches,{headers: this.headers})
+  createTache(taches: Taches, id :number):Observable<Taches>{
+    let baseUrlGet = this.baseUrl + "/create" + id;
+    return this.httpClient.post<Taches>(baseUrlGet, taches,{headers: this.headers})
   }
 
   tachesList(): Observable<Taches[]>{
-    let baseUrlGet = this.baseUrl+"/all";
+    let baseUrlGet = this.baseUrl + "/all";
     return this.httpClient.get<Taches[]>(baseUrlGet)
   }
 
@@ -39,8 +39,15 @@ export class TachesService {
     return this.httpClient.get<Taches>(baseUrlGet)
   }
 
-  updateTache(Id: number, taches: Taches): Observable<Object>{
-    let baseUrlGet = this.baseUrl+"/update/" + Id;
-    return this.httpClient.put(baseUrlGet, taches)
+  updateTache(Id: number, taches: Taches): Observable<Taches>{
+    let baseUrlGet = this.baseUrl+ "/" + Id;
+    return this.httpClient.put<Taches>(baseUrlGet, taches)
+  }
+
+  deleteTache(Id: number): Observable<Taches>{
+    let baseUrlGet = this.baseUrl +"/" + Id
+   
+    return this.httpClient.delete<Taches>(baseUrlGet,{headers: this.headers})
+  
   }
 }

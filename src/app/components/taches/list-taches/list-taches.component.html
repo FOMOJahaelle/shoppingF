@@ -1,1 +1,27 @@
-<p>list-taches works!</p>
+
+<table class = "table table-striped">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Description</th>
+        <!-- <th>course</th> -->
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr  class="text-center" *ngFor="let tache of taches">
+        <td> {{ tache.id }} </td>
+        <td> {{ tache.name }} </td>
+        <td> {{ tache.description }} </td>
+        <!-- <td> {{ tache.course.id}} </td> -->
+       
+        <!-- <td> {{ vehicule.user.username }} </td> -->
+        <td>
+          <!-- <button (click)="vehiculeDetails(vehicule.id)" class="btn btn-secondary">View</button> -->
+           <!-- <button data-bs-toggle="modal" (click)="getCourseSelected(course.id)" data-bs-target="#modalUpdate" class="btn btn-info" style="margin-left: 10px;">Update</button>  -->
+           <button (click)="deleteTache(tache.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button> 
+       
+        </td>
+      </tr>
+    </tbody>
+  </table>

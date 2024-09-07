@@ -11,6 +11,7 @@ import path from 'path';
 import { LoginComponent } from './components/login/login.component';
 import { authentificationGuard } from './guards/authentification.guard';
 import { AdminComponent } from './components/admin/admin.component';
+import { ListTachesComponent } from './components/taches/list-taches/list-taches.component';
 
 
 export const routes: Routes = [
@@ -18,12 +19,13 @@ export const routes: Routes = [
     {path: 'login', component: LoginComponent},
     {path: 'create-user',component:CreateUserComponent} ,
     
-    {path: 'admin', component: AdminComponent, children:[
+    {path: 'admin', component: AdminComponent, 
+        children:[
     { path: 'create-course', component: CreateCourseComponent},
     { path: 'list-course', component: ListCourseComponent },
-    { path: 'view-course/:courseId', component: ViewCourseComponent },
-    { path: 'edit-course/:courseId', component: EditCourseComponent } ,
-    {path: 'create-taches', component: CreateTachesComponent}
+    { path: 'list-taches', component: ListTachesComponent},
+    { path: 'edit-course/:id', component: EditCourseComponent } ,
+    { path: 'create-taches', component: CreateTachesComponent}
     ]},
     
 ];

@@ -37,7 +37,7 @@ export class CreateUserComponent {
     this.formUser=this.fb.group({
       username : this.fb.control(""),
       password : this.fb.control(""),
-      role: this.fb.control("")
+      // role: this.fb.control("")
     })
    
   }
@@ -45,11 +45,12 @@ export class CreateUserComponent {
   saveUser(){
     console.log(this.formUser.value);
 
-    // this.userService.onRegister(this.formUser.value).subscribe( data => {
-    //   console.log(data);
+    this.userService.onRegister(this.formUser.value).subscribe( data => {
+      console.log(data);
+      this.router.navigateByUrl("/login")
      
-    // },
-    // error => console.log(error));
+    },
+    error => console.log(error));
   }
   
   goToUserList(){

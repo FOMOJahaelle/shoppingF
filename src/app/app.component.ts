@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
  import { CommonModule } from '@angular/common';
  import { DividerModule } from 'primeng/divider';
@@ -6,6 +6,8 @@ import { ButtonModule } from 'primeng/button';
 import { HTTP_INTERCEPTORS, HttpClient} from '@angular/common/http';
 import { appHttpInterceptor } from './interceptors/app-http.interceptor';
 import { UserService } from './services/user/user.service';
+import { ListCourseComponent } from './components/course/list-course/list-course.component';
+import { ListTachesComponent } from './components/taches/list-taches/list-taches.component';
 
 
 
@@ -15,6 +17,8 @@ import { UserService } from './services/user/user.service';
 @Component({
   selector: 'app-root',
   standalone: true,
+
+  
 
   imports: [
      CommonModule,
@@ -37,6 +41,14 @@ import { UserService } from './services/user/user.service';
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
+
+
+// @NgModule({
+//   declarations: [
+//     ListTachesComponent,
+//      ListCourseComponent,  
+//   ]
+// });
 export class AppComponent {
 
   title = 'shoopingF';

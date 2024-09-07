@@ -2,10 +2,11 @@ import { Taches } from "../taches/taches";
 
 export class Course {
 
-    id!: number;
-    name!: string;
-     description!: string;
-     date!:Date;
-     archive!: boolean;
-     taches!: Taches[];
+    id!: number
+    name!: string
+     description!: string
+     date!:any
+     archive!: boolean
+     statut!: boolean
+    //  taches!: Taches[]
 }

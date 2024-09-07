@@ -6,25 +6,309 @@
 
 <table class = "table table-striped">
   <thead>
-    <tr>
+    <tr class="text-center">
+      <!-- <th>ID</th> -->
       <th>Name</th>
       <th>Description</th>
-      <th>Archive</th>
+      <th>Statut</th>
+      <th>Taches</th>
+      <th>Actions</th>
     </tr>
+
+
   </thead>
   <tbody>
-    <tr *ngFor="let course of this.courses">
+    <tr  class="text-center" *ngFor="let course of courses">
+      <!-- <td> {{ course.id}} </td> -->
       <td> {{ course.name }} </td>
       <td> {{ course.description }} </td>
       <td> {{ course.archive }} </td>
-     
-      <!-- <td> {{ vehicule.user.username }} </td> -->
+      <!-- <td>NombresDeTaches ({{ course.taches.length }} )</td> -->
       <td>
-        <!-- <button (click)="vehiculeDetails(vehicule.id)" class="btn btn-secondary">View</button> -->
-        <!-- <button (click)="updateVehicule(vehicule.id)" class="btn btn-info" style="margin-left: 10px;">Update</button> -->
-        <!-- <button (click)="deleteVehicule(vehicule.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button> -->
-     
+         <!-- <a routerLink="['admin/edit-course', course.id]" class="btn btn-info btn-sm">Edit</a>  -->
+        <button data-bs-toggle="modal" (click)="getCourseSelected(course.id)" data-bs-target="#ModalUpdate" class="btn btn-info" style="margin-left: 10px;">Update</button> 
+        <button data-bs-toggle="modal"(click)="view(course.id)"  class="btn btn-info" style="margin-left: 10px;">View</button> 
+        <!-- <button   class="btn btn-danger" (click)="deleteCourse(course.id)"  style="margin-left: 10px;"><i style="margin-right: 10px;" class="fa fa-trash"></i>Delete</button> -->
+        <!-- <button   (click)="updateCourse(course.id)" class="btn btn-info" style="margin-left: 10px;">Update</button> -->
+       <button (click)="deletec(course.id)" class="btn btn-danger" style="margin-left: 10px;">Delete</button> 
       </td>
     </tr>
   </tbody>
 </table>
+
+
+
+
+<!-- 
+<div class="modal fade" id="ModalUpdate"  *ngFor="let course of courses" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><strong>FORMULAIRE DE MODIFICATION DU VEHICULE</strong></h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form   class="FormContent">
+          <div class="table-content"> 
+           <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >ID<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.id" name="id" required>
+              </div>
+            </div><br> 
+           <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.name" name="name" required>
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10" for="description" >Description</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"   [(ngModel)] = "course2.description"  id="description"  name="description" >
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10"  >DateCreate</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="date"  class="form-control"  [(ngModel)] = "course2.date"   name="dateCreate" >
+              </div>
+            </div><br>
+              <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Archive</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="boolean" class="form-control"  [(ngModel)] = "course2.archive "    name="archive">
+              </div>
+              </div><br>
+      </div>
+    </form>
+      </div>
+       <div class="modal-footer"> 
+        <div class="modal-footer">
+        
+          <button type="submit" data-bs-dismiss="modal" (click)="updateCourse()"  class="btn btn-primary">Update</button>
+       </div> -->
+      <!-- </div>
+    </div>
+  </div>
+</div>  -->
+
+
+
+ <div class="modal fade" id="ModalUpdate" *ngFor="let course of courses"  tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><strong>Modifier La Course</strong> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <form   class="FormContent">
+          <div class="table-content"> 
+           <!-- <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >ID<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.id" name="id" required>
+              </div>
+            </div><br>  -->
+           <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.name" name="name" required>
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10" for="description" >Description</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"   [(ngModel)] = "course2.description"  id="description"  name="description" >
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10"  >DateCreate</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="date"  class="form-control"  [(ngModel)] = "course2.date"   name="dateCreate" >
+              </div>
+            </div><br>
+              <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Archive</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="boolean" class="form-control"  [(ngModel)] = "course2.archive "    name="archive">
+              </div>
+              </div><br>
+      </div>
+    </form>
+      <div class="modal-footer">
+        
+         <button type="submit" data-bs-dismiss="modal" (click)="updateCourse()"  class="btn btn-primary">Update</button>
+      </div>
+       
+    </div>
+  </div> 
+</div> 
+
+
+<!-- modal de detail dune course -->
+<!-- 
+<div class="modal fade" id="ModalUpdate2"  *ngFor="let course of courses"  tabindex="-1" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle"><strong>Detail La Course</strong> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <form   class="FormContent">
+          <div class="table-content">
+           <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >ID<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.id" name="id" required>
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.name" name="name" required>
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10"  >Description</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"   [(ngModel)] = "course2.description"   name="description" >
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label  class="p-t-b-10"  >DateCreate</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="date"  class="form-control"  [(ngModel)] = "course2.date"   name="dateCreate" >
+              </div>
+            </div><br>
+              <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Archive</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="boolean" class="form-control"  [(ngModel)] = "course2.archive "    name="archive">
+              </div>
+              </div><br>
+      </div>
+    </form>
+      <div class="modal-footer"> 
+      
+       -->
+   <!-- <button data-bs-toggle="modal"  data-bs-target="#addTache" class="btn btn-info" style="margin-left: 10px;">AddTache</button>  -->
+   
+         <!-- <button type="submit" data-bs-dismiss="modal" (click)="updateCourse()"  class="btn btn-primary">Update</button> -->
+      <!-- </div>
+       
+     </div> 
+  </div>
+</div>   -->
+
+
+
+
+
+<!-- modal d'ajout d'une tache -->
+<!-- 
+<div class="modal fade" id="addTache"  data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="staticBackdropLabel"><strong>Ajouter Une Tache</strong> </h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body" >
+        <form   class="FormContent" (ngSubmit)="saveTache()">
+          <div class="table-content"> -->
+            <!-- <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  >ID<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "course2.id" name="id" required>
+              </div>
+            </div><br> -->
+            <!-- <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10"  for="name" class="form-label" >Name<span class="requiredStar">*</span></label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control" [(ngModel)] = "taches.name" name="name" required>
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10" for="description" class="form-label" >Description</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text" class="form-control"   [(ngModel)] = "taches.description"   name="description" >
+              </div>
+            </div><br>
+            <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10" for="statut" class="form-label"  >Statut</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="text"  class="form-control"  [(ngModel)] = "taches.statut"   name="statut" >
+              </div>
+            </div><br> -->
+              <!-- <div class="form-group p-10 row">
+              <div class="col-sm-3">
+                <label class="p-t-b-10">Archive</label>
+              </div>
+              <div class="col-sm-9">
+                <input type="boolean" class="form-control"  [(ngModel)] = "course2.archive "    name="archive">
+              </div>
+              </div><br> 
+      </div>
+    </form>
+      <div class="modal-footer">
+        
+         <button type="submit"   class="btn btn-primary">save</button>
+      </div>
+       
+    </div>
+  </div>
+</div> 
+
+
+ -->
+
+
+
+
+
+
+
+

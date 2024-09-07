@@ -18,7 +18,8 @@
         </li> -->
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search">
+        <input class="form-control me-2"  [(ngModel)]="searchText" name="search" autocomplete="on"
+        placeholder=" entrez un nom">
         <button class="btn btn-primary" type="button">Search</button>
       </form>
     </div>

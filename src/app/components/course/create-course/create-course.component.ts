@@ -39,13 +39,13 @@ constructor(private fb: FormBuilder,
 
 ngOnInit(): void {
 
-  this.showMessages = sessionStorage.getItem('message');
-  this.formCourse =this.fb.group({
-    name: this.fb.control(" "),
-    description : this.fb.control(" "),
-    dateCreate:this.fb.control(" "),
-    archive: this.fb.control(" ")
-  })
+  // this.showMessages = sessionStorage.getItem('message');
+  // this.formCourse =this.fb.group({
+  //   name: this.fb.control(" "),
+  //   description : this.fb.control(" "),
+  //   dateCreate:this.fb.control(" "),
+  //   archive: this.fb.control(" ")
+  // })
 }
 
 // this.vehiculeService.getTypeVehiculesList().subscribe((data: any) => {
@@ -55,13 +55,13 @@ ngOnInit(): void {
 // });
 
 saveCourse(){
-  // console.log(this.formCourse.value);
-  this.courseService.createCourse(this.formCourse.value).subscribe({
-    
+   console.log(this.course);
+  this.courseService.createCourse(this.course).subscribe({
     next : data =>{
-     
+      console.log(this.course);
       console.log(data);
-     this.router.navigateByUrl("/list-course")
+
+     this.router.navigateByUrl("admin/list-course")
     },
     error: err =>{
       console.log(err);

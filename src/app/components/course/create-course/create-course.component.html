@@ -46,14 +46,14 @@
     <div class="card">
          <div class="card-header">NOUVELLE COURSE </div>
          <div class="card-body">
-          <form  [formGroup]="formCourse"  (ngSubmit)="saveCourse()">
+          <form  (ngSubmit)="saveCourse()">
             <div class="table-content">
               <div class="form-group p-10 row">
                 <div class="col-sm-3">
                   <label class="p-t-b-10" for="name" class="form-label">Name<span class="requiredStar">*</span></label>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="name" required name="Name" formControlName="name">
+                  <input type="text" class="form-control" id="name" [(ngModel)] = "course.name" required name="Name" >
                 </div>
               </div><br>
               <div class="form-group p-10 row">
@@ -61,7 +61,7 @@
                   <label  class="p-t-b-10"  for="Description" class="form-label">Description</label>
                 </div>
                 <div class="col-sm-9">
-                  <input type="text" class="form-control" id="Description" formControlName="description" >
+                  <input type="text" class="form-control" id="Description" [(ngModel)] = "course.description"  name="Description">
                 </div>
               </div><br>
               <div class="form-group p-10 row">
@@ -69,7 +69,7 @@
                   <label  class="p-t-b-10"  for="DateCreate" class="form-label">DateCreate</label>
                 </div>
                 <div class="col-sm-9">
-                  <input type="date" class="form-control" id="DateCreate" formControlName="dateCreate" >
+                  <input type="date" class="form-control" id="DateCreate" [(ngModel)] = "course.date" name="DateCreate"  >
                 </div>
               </div><br>
                 <div class="form-group p-10 row">
@@ -77,9 +77,17 @@
                   <label class="p-t-b-10" for="Archive" class="form-label">Archive</label>
                 </div>
                 <div class="col-sm-9">
-                  <input type="boolean" class="form-control" id="Archive"  formControlName="archive">
+                  <input type="boolean" class="form-control" id="Archive" [(ngModel)]="course.archive" name="Archive" >
                 </div>
                 </div><br>
+                <div class="form-group p-10 row">
+                  <div class="col-sm-3">
+                    <label class="p-t-b-10" for="Statut" class="form-label">Statut</label>
+                  </div>
+                  <div class="col-sm-9">
+                    <input type="boolean" class="form-control" id="Statut" [(ngModel)]="course.statut" name="Statut" >
+                  </div>
+                  </div><br>
             
             <div class="table-footer">
               <button class="btn btn-success">Save</button>
